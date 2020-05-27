@@ -1,0 +1,71 @@
+<div class="container main-container">
+  <div class="row">
+    <div class="col-md">
+      <div class="form-group">
+        <label for="fillingTime">Filling time:</label>
+        <input type="number" id="fillingTime" class="form-control" [(ngModel)]="fillingTime" min="0">
+        <small id="fillingTimeHelp" class="form-text text-muted">Please set value in milliseconds</small>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="runningTime">Running time:</label>
+        <input type="number" id="runningTime" class="form-control" [(ngModel)]="runningTime" min="0">
+        <small id="runningTimeHelp" class="form-text text-muted">Please set value in milliseconds</small>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="usersCount">Users count:</label>
+        <input type="number" id="usersCount" class="form-control" [(ngModel)]="usersCount" min="0">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="wonPercentage">Won percentage:</label>
+        <input type="number" id="wonPercentage" class="form-control" [(ngModel)]="wonPercentage" min="0">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      Status:
+      <span class="badge" *ngIf="selectedStatus" [ngClass]="{
+          'badge-info': selectedStatus === 'Filling',
+          'badge-warning': selectedStatus === 'Running',
+          'badge-primary': selectedStatus === 'Finish'
+        }">{{selectedStatus}}</span>
+    </div>
+
+    <div class="card-body user-card">
+      <div class="alert user" *ngFor="let user of users; let i = index" [ngClass]="{
+          'alert-secondary': user.status === 'Default',
+          'alert-success': user.status === 'Won',
+          'alert-danger': user.status === 'Loss'
+        }">
+        <!--[src]="user.photo" for dynamic photo with appropriate JSON"-->
+        <img src="https://via.placeholder.com/35" class="rounded-circle">
+        {{user.name || 'User #' + i}}
+        <span class="badge" [ngClass]="{
+          'badge-secondary': user.status === 'Default',
+          'badge-success': user.status === 'Won',
+          'badge-danger': user.status === 'Loss'
+        }">{{user.status}}</span>
+      </div>
+
+      <div *ngIf="users.length === 0">
+        <h6 class="card-title">Oops, it is empty...</h6>
+        <p class="card-text">Please, press the start button.</p>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary btn-lg btn-block start-button" (click)="start()">Start</button>
+
+  <div class="row">
+    <div class="col-md-2 offset-md-10 text-right">
+      <app-timer [start]='startTimer'></app-timer>
+    </div>
+  </div>
+</div>

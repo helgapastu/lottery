@@ -1,0 +1,21 @@
+$base-color: #e9e9e9;
+
+.user {
+  display: inline-block;
+  border-radius: 50px;
+  margin: 5px;
+  padding: 0px 10px 0 0;
+}
+
+.user-card {
+  padding: 5px;
+}
+
+.main-container {
+  background-color: $base-color;
+  padding: 20px;
+}
+
+.start-button {
+   margin: 15px 0;
+}
